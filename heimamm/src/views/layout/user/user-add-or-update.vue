@@ -43,7 +43,7 @@
 
       <span slot="footer" class="dialog-footer">
         <el-button @click="dialogVisible = false">取 消</el-button>
-        <el-button type="primary" @click="submint" ref="comfirm" :disabled="comfirm">确 定</el-button>
+        <el-button type="primary" @click="submint" ref="comfirm" :loading="comfirm">确 定</el-button>
       </span>
     </el-dialog>
   </div>
@@ -143,7 +143,7 @@ export default {
       // 校验之后执行一个回调函数
       // this.$refs.comfirm.disabled = true;
       // 确定按钮禁用
-      this.comfirm = !this.comfirm;
+      this.comfirm = true;
       this.$refs.ruleForm.validate(async valid => {
         if (!valid) return (this.comfirm = !this.comfirm);
         console.log("sbmint", this.modo);
@@ -169,7 +169,7 @@ export default {
           this.dialogVisible = false;
           // console.log(res);
           this.$parent.getUserList();
-          this.comfirm = !this.comfirm;
+          this.comfirm = false;
         } else {
           // 提示hint
           this.$notify({
@@ -177,7 +177,7 @@ export default {
             message: res.data.message,
             type: "warning"
           });
-          this.comfirm = !this.comfirm;
+          this.comfirm =false;
         }
       });
     }
